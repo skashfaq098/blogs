@@ -36,11 +36,18 @@ state.mainblog=id
       state.posts.splice(id,1)
 
     },
-    addBlogs(state,blogdata){
-      state.posts.push(blogdata)
-
-    }
-    
+    addPosts(state,data){
+      console.log("axios",data)
+      // axios.post('http://localhost:8080/posts',{data:data}).then(function(response) {
+      //       state.posts.push(response.data);  });
+      axios({
+        method: 'post',
+        url: 'http://localhost:8080/posts', 
+        data: data
+      }).then(function(response) {
+        state.books.push(response.data);  });
+            
+    }    
   },
   getters:{
     getBlog(state,id){
@@ -54,12 +61,17 @@ state.mainblog=id
 .then(function(response) {
   context.commit('setBooks', response.data);  })
     },
-    addPosts(context,data){
-      axios({
-        method: 'post',
-        url: 'http://localhost:8080/posts', 
-        data: data
-      });
-    }
+    // addPosts(context,data){
+    //   axios.post('http://localhost:8080/posts',{data:data}).then(function() {
+    //         context.commit('addBlogs',data);  });
+    // }
+    // addPosts(context,data){
+    //   axios({
+    //     method: 'post',
+    //     url: 'http://localhost:8080/posts', 
+    //     data: data
+    //   }).then(function(response) {
+    //     context.commit('addblogs',response.data);  });
+    // }
   }
 })

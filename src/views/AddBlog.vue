@@ -26,17 +26,12 @@ export default {
 
 methods:{
     addBlog(){
-      this.idCount++
       var blogdata={
-        id:this.idCount,
         title:this.title,
         image:this.image,
         description:this.description,
-        likes:0,
-        comments:["Hello"]
-
       }
-      this.$store.commit("addBlogs", blogdata)
+      this.$store.commit("addPosts", blogdata)
       console.log(this.$store.state.posts)
     }
   },
